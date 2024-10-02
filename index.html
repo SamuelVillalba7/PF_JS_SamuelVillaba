@@ -4,14 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto JS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Hola profe como le va?</h1>
-    <h3>Este proyecto para gestionar un catálogo de productos. Permite a los usuarios ver<br>
-         los productos disponibles, agregar nuevos productos al catálogo, realizar compras<br>
-         reduciendo el stock de los productos seleccionados, y llevar un registro de todas <br>
-         las compras realizadas. 
-          .</h3>
-    <script src="./app.js"></script>
+<body>        
+        <div id="productos" class="productos-container">
+          
+        </div>
+        
+        <div class="botonera">
+            <button id="btnCargarProducto" class="btnGeneral" >Agregar Producto</button>
+            <button id="btnMostrarCarrito" class="btnGeneral">Carrito</button>
+          </div>
+    
+       
+        <div class="container">
+
+          <div id="cargarProducto" class="form-container ocultar">
+            <form action="">
+              <label for="txtNombre" >Nombre</label>
+              <input type="text" id="txtNombre" required>
+
+              <label for="txtTipo">Tipo</label>
+              <input type="text" id="txtTipo"  required>
+              
+              <label for="txtPrecio">Precio</label>
+              <input type="number" id="txtPrecio"  required>
+
+              <label for="txtStock">Stock</label>
+              <input type="number" id="txtStock"  required>
+
+              <label for="txtImagen">Imagen</label>
+              <input type="text" id="txtImagen"  required>      
+            </form>
+            <div>
+              <button id="btnAgregar" class="btnGeneral">Crear producto</button>
+            </div>
+          </div>
+
+          <div class="carrito-container">
+            <div id="carrito" class="carrito ocultar">
+              <h2>CARRITO</h2>
+              <div id="carrito-text">
+                <table id="table">
+                  
+                </table>
+              </div>
+              <div id="lista">
+                
+              </div>
+
+              <div class="totalidad ">
+                <div id="total" ></div>
+                <button id="btnComprar" class="btnGeneral" >Comprar</button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+          <div id="Usuario-Container" class="usuario-container ocultar">
+
+            <form class="form-Usario" >
+              <label for="txtNombreUsuario" >Nombre</label>
+                <input type="text" id="txtNombreUsuario" required>
+  
+                <label for="txtEmail">Email</label>
+                <input type="text" id="txtEmail"  required>
+                
+                <label for="txtTelefono">Telefono</label>
+                <input type="text" id="txtTelefono"  required>
+                
+            </form>
+            <div>
+  
+              <button id="btnFinalizarCompra" class="btnGeneral ">Finalizar Compra</button>
+            </div>
+  
+          </div>
+
+          
+
+        </div>
+        <div id="finalizarCompra" class="div-finalizarCompra ocultar">
+
+        </div>
+
+       
+
+  <script src="./app.js"></script> 
 </body>
 </html>

@@ -5,16 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto JS</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
-<body>        
-        <div id="productos" class="productos-container">
+<body>       
+  
+        
+        <div id="productos-container">
           
         </div>
         
         <div class="botonera">
-            <button id="btnCargarProducto" class="btnGeneral" >Agregar Producto</button>
-            <button id="btnMostrarCarrito" class="btnGeneral">Carrito</button>
+          <button id="btnMostrarCargarProducto" class="btnGeneral" >Agregar Producto</button>
+          <button id="btnMostrarCarrito" class="btnGeneral">Carrito</button>
+          <div >
+            <button id="dropdown" class="btnGeneral">filtro</button>
+            <div id="filtros" class="ocultar">
+              <button class="filtroOpcion">mouse</button>
+              <button class="filtroOpcion">monitor</button>
+              <button class="filtroOpcion">teclado</button>
+              <button class="filtroOpcion">parlante</button>
+              <button class="filtroOpcion">todo</button>
+            </div>
           </div>
+        </div>
     
        
         <div class="container">
@@ -63,9 +76,9 @@
 
 
 
-          <div id="Usuario-Container" class="usuario-container ocultar">
+          <div id="usuario-container" class="ocultar">
 
-            <form class="form-Usario" >
+            <form class="form-usuario" >
               <label for="txtNombreUsuario" >Nombre</label>
                 <input type="text" id="txtNombreUsuario" required>
   
@@ -86,12 +99,16 @@
           
 
         </div>
-        <div id="finalizarCompra" class="div-finalizarCompra ocultar">
 
-        </div>
+        
 
        
+        
 
+        
+
+       
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./app.js"></script> 
 </body>
 </html>

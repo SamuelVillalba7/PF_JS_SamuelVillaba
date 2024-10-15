@@ -30,6 +30,53 @@ class Usuario {
 }
 
 // ==============================
+// VALIDACIONES
+// ==============================
+
+function validarProducto(p) {
+
+    if (isNaN(p.Precio) || p.Precio <= 0) {
+        return false;
+    }
+    if(!p.Nombre || p.Nombre.trim() === ""){
+        return false
+    }
+    if(!p.Tipo || p.Tipo.trim() === ""){
+        return false
+    }
+    if (isNaN(p.Precio) || p.Precio <= 0) {
+        return false;
+    }
+    if (isNaN(p.Stock) || p.Stock <= 0) {
+        return false;
+    }
+    if(!p.Imagen || p.Imagen.trim() === ""){
+        return false
+    }
+    return true;
+}
+
+function validarUsuario(aux){
+
+
+
+    if(!aux.Nombre || aux.Nombre.trim() === ""){
+        return false
+    }
+    if(!aux.Email || aux.Email.trim() === ""){
+        return false
+    }
+    if(!aux.Telefono || aux.Telefono.trim() === ""){
+        return false
+    }
+    return true
+}
+
+
+
+
+
+// ==============================
 // FUNCIONES RELACIONADAS CON EL CATÁLOGO
 // ==============================
 
@@ -108,6 +155,12 @@ function crearProducto() {
 }
 
 
+
+
+
+
+
+
 // ==============================
 // FUNCIONES PARA MANEJAR EL CARRITO Y LA LISTA
 // ==============================
@@ -183,7 +236,16 @@ function agregarUsuario(){
     const nombre = document.getElementById("txtNombreUsuario").value
     const email = document.getElementById("txtEmail").value
     const telefono = document.getElementById("txtTelefono").value
-    usuarios.push(new Usuario(nombre, email, telefono))
+
+    let aux = new Usuario(nombre, email, telefono)
+
+    if(validarUsuario(aux)){
+        usuarios.push(aux)
+        localStorage.setItem("Usuarios", JSON.stringify(usuarios))
+        return true
+    }else{
+        return false
+    }
 }
 
 
@@ -268,19 +330,6 @@ function toastSinStock() {
 }
 
 
-// ==============================
-// VALIDACIONES
-// ==============================
-
-function validarProducto(p) {
-    if (isNaN(p.Precio) || p.Precio <= 0) {
-        return false;
-    }
-    if (isNaN(p.Stock) || p.Stock <= 0) {
-        return false;
-    }
-    return true;
-}
 
 // ==============================
 // BOTONES
@@ -292,10 +341,9 @@ function validarProducto(p) {
 
 const btnFinalizarCompra = document.getElementById("btnFinalizarCompra")
 btnFinalizarCompra.addEventListener("click", () => {
-    agregarUsuario()
+    if(agregarUsuario()){
     lista.innerHTML = ``
     carrito.length = 0
-    console.table(carrito)
     actualizarLista()
     visible("carrito")
     visible("usuario-container")
@@ -304,7 +352,15 @@ btnFinalizarCompra.addEventListener("click", () => {
         icon: "success",
         title: "Se realizo la compra",
     });
-    localStorage.setItem("Usuarios", JSON.stringify(usuarios))
+
+    }else{
+        Swal.fire({
+            icon: "warning",
+            title: "El usuario no es valido",
+        });
+    }
+    
+    
 
 })
 
@@ -350,7 +406,15 @@ function botonEventos() {
     const btnComprar = document.getElementById("btnComprar")
 
     btnComprar.addEventListener("click", (e) => {
-        visible("usuario-container")
+        if(carrito.length===0){
+            Swal.fire({
+                icon: "warning",
+                title: "Se debe agregar un producto al carrito ",
+            });
+
+        }else{
+            visible("usuario-container")
+        }
 
     })
 

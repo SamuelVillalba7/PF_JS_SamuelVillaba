@@ -1,7 +1,7 @@
 // ==============================
 // VARIABLES GLOBALES
 // ==============================
-const carrito = [];
+let carrito = [];
 const lista = document.getElementById("lista");
 const table = document.getElementById("table");
 const catalogo = [];
@@ -170,7 +170,7 @@ function ordenarLista() {
 
     carrito.forEach(producto => {
         // Busca si el producto ya existe en la listaOrdenada
-        let productoExistente = listaOrdenada.find(p => p.id === producto.Id);
+        let productoExistente = listaOrdenada.find(p => p.Id === producto.Id);
 
         if (productoExistente) {
             // Si el producto ya existe, incrementa las unidades y actualiza el total
@@ -179,7 +179,7 @@ function ordenarLista() {
         } else {
             // Si el producto no existe, crea un nuevo objeto con Unidades = 1 y Total igual al precio del producto
             listaOrdenada.push({
-                id: producto.Id,
+                Id: producto.Id,
                 Nombre: producto.Nombre,
                 Precio: producto.Precio,
                 Unidades: 1,
@@ -203,6 +203,7 @@ function actualizarLista() {
             </tr>
     `;
     const list = ordenarLista();
+ 
 
     list.forEach(p => {
 
@@ -212,9 +213,14 @@ function actualizarLista() {
                 <td>${p.Precio}</td>
                 <td>${p.Unidades}</td>
                 <td>${p.Total}</td>
+                <td><button class="eliminar">eliminar</button></td>
             </tr>
         `
+       
+       
     });
+
+    
 
     table.innerHTML = text;
     const acumulador = list.reduce((acum, p) => {
@@ -225,7 +231,7 @@ function actualizarLista() {
     total.innerHTML = `
     <p>TOTAL : $ ${acumulador}</p>
     `
-
+    botonEliminar()  
 }
 
 
@@ -336,6 +342,26 @@ function toastSinStock() {
 // ==============================
 
 
+function botonEliminar() {
+// }
+    const eliminarDelCarrito = document.querySelectorAll(".eliminar");
+    let carritoAux = ordenarLista();
+
+    if (eliminarDelCarrito.length === 0) {
+        return; // Si no hay productos, salir de la función
+    }
+
+   
+    eliminarDelCarrito.forEach((b, index) => {
+        b.addEventListener("click", () => {
+            console.log("111")
+            let idProducto = carritoAux[index].Id;
+            carrito = carrito.filter(e => e.Id !== idProducto);
+       
+            actualizarLista(); 
+        });
+    });
+}
 
 
 
@@ -388,7 +414,11 @@ function botonEventos() {
                 producto.Stock--;
                 localStorage.setItem("catalogo", JSON.stringify(array))
                 carrito.push(producto)
-                actualizarLista()         
+                
+                actualizarLista()
+                    
+                   
+
 
             } else if (producto.Stock === 0) {
 
@@ -449,6 +479,7 @@ dropdown.addEventListener("click", () => {
 
 async function app() {
     await inicializarCatalogo();
+   
     listarProductos();
 }
 app()
